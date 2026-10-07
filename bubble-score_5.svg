@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="star-small"
+   viewBox="0 0 36.002998 34.366001"
+   opacity="1"
+   stroke-width="1.75"
+   version="1.1"
+   sodipodi:docname="bubble-score_5.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   width="36.002998"
+   height="34.366001"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="17.215668"
+     inkscape:cx="7.5222176"
+     inkscape:cy="12.98236"
+     inkscape:window-width="1685"
+     inkscape:window-height="1361"
+     inkscape:window-x="20"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="star-small" />
+  <path
+     id="path5"
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke-width:2.68109"
+     d="M 17.956577,8.1830056 A 12.5,9 0 0 0 5.5014989,17.212302 12.5,9 0 0 0 18.042515,26.183005 12.5,9 0 0 0 30.501499,17.153708 v -0.0039 A 12.5,9 0 0 0 17.956577,8.1830056 Z m 0.0059,1.0800781 A 10.999942,7.9199582 0 0 1 29.00154,17.153708 v 0.002 A 10.999942,7.9199582 0 0 1 18.038608,25.102927 10.999942,7.9199582 0 0 1 7.001499,17.208396 10.999942,7.9199582 0 0 1 17.962436,9.2630837 Z"
+     sodipodi:insensitive="true"
+     inkscape:label="Bubble" />
+  <text
+     xml:space="preserve"
+     style="writing-mode:lr-tb;direction:ltr;opacity:1;fill:#000000;fill-opacity:1"
+     x="14.18757"
+     y="21.550344"
+     id="text4"
+     inkscape:label="Number"><tspan
+       sodipodi:role="line"
+       id="tspan4"
+       x="14.18757"
+       y="21.550344">5</tspan></text>
+</svg>
