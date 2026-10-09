@@ -20,84 +20,84 @@
   let ballot_table(candidates) = [
     #show "bubble0": name => box[
       #box(image(
-        "bubble-score_0.svg",
+        "images/bubble-score_0.svg",
         height: 2em,
       ))
     ]
     
     #show "bubble1": name => box[
       #box(image(
-        "bubble-score_1.svg",
+        "images/bubble-score_1.svg",
         height: 2em,
       ))
     ]
     
     #show "bubble2": name => box[
       #box(image(
-        "bubble-score_2.svg",
+        "images/bubble-score_2.svg",
         height: 2em,
       ))
     ]
     
     #show "bubble3": name => box[
       #box(image(
-        "bubble-score_3.svg",
+        "images/bubble-score_3.svg",
         height: 2em,
       ))
     ]
     
     #show "bubble4": name => box[
       #box(image(
-        "bubble-score_4.svg",
+        "images/bubble-score_4.svg",
         height: 2em,
       ))
     ]
     
     #show "bubble5": name => box[
       #box(image(
-        "bubble-score_5.svg",
+        "images/bubble-score_5.svg",
         height: 2em,
       ))
     ]
     
     #show "star0": name => box[
       #box(image(
-        "star-score_0.svg",
+        "images/star-score_0.svg",
         height: 5em,
       ))
     ]
     
     #show "star1": name => box[
       #box(image(
-        "star-score_1.svg",
+        "images/star-score_1.svg",
         height: 4em,
       ))
     ]
     
     #show "star2": name => box[
       #box(image(
-        "star-score_2.svg",
+        "images/star-score_2.svg",
         height: 4em,
       ))
     ]
     
     #show "star3": name => box[
       #box(image(
-        "star-score_3.svg",
+        "images/star-score_3.svg",
         height: 4em,
       ))
     ]
     
     #show "star4": name => box[
       #box(image(
-        "star-score_4.svg",
+        "images/star-score_4.svg",
         height: 4em,
       ))
     ]
     
     #show "star5": name => box[
       #box(image(
-        "star-score_5.svg",
+        "images/star-score_5.svg",
         height: 4em,
       ))
     ]
@@ -131,7 +131,7 @@
   ]
   
   align(top)[
-    #image("STAR_Voting_Logo-black.png", fit: "contain")
+    #image("images/STAR_Voting_Logo-black.png", fit: "contain")
   ]
   
   align(center)[
