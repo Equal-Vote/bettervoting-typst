@@ -21,14 +21,14 @@
   doc
 }
 
-// The ballot ID and its QR code, shown to the right of a ballot's instructions.
+// The ballot ID and its QR code, shown to the right of a ballot's instructions. The ID is
+// printed large enough to read and type in by hand if the QR code can't be scanned.
 // `qr-data` is what the QR code encodes; it defaults to the ID itself.
-#let ballot-id-block(ballot-id, qr-data: none) = box(
-  stack(
-    spacing: 0.2em,
-    align(center, qrcode(if qr-data == none { ballot-id } else { qr-data }, width: 0.85in, quiet-zone: 4)),
-    align(center, text(size: 7pt)[Ballot ID \ #text(weight: "bold")[#ballot-id]]),
-  )
+#let ballot-id-block(ballot-id, qr-data: none) = stack(
+  spacing: 0.25em,
+  align(right, qrcode(if qr-data == none { ballot-id } else { qr-data }, width: 0.85in, quiet-zone: 4)),
+  align(right, text(size: 8pt)[Ballot ID]),
+  align(right, text(size: 10pt, weight: "bold", hyphenate: false)[#ballot-id]),
 )
 
 // One STAR ballot. When `ballot-id` is given, it is printed with a QR code beside the
@@ -171,12 +171,12 @@
   if ballot-id == none {
     align(center, instructions)
   } else {
-    // The ID and QR code sit in the empty space beside the centered instructions, so they
-    // add no height and every copy keeps them in the same spot for scanning.
+    // The ID and QR code share the instructions' row, so they add little height and every
+    // copy keeps them in the same spot for scanning. The instructions move to the left
+    // margin to leave room for the ID on one line.
     grid(
-      columns: (1fr, auto, 1fr),
-      align: (left, center + horizon, right + horizon),
-      [],
+      columns: (auto, 1fr),
+      align: (left + horizon, right + horizon),
       instructions,
       ballot-id-block(ballot-id, qr-data: qr-data),
     )

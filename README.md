@@ -12,17 +12,19 @@ Clone this git repo. Then from that directory, edit the list of candidates in th
 
 The ballot is set in OpenDyslexic. The regular and bold files are in `fonts/` under the SIL Open Font License (`fonts/OFL.txt`). Pass `--font-path fonts` so Typst finds them; without it, Typst falls back to a default font.
 
-## Print numbered copies
+## Print a batch of numbered ballots
 
-`ballots.typ` prints several copies of a ballot, one per page. Each copy has its own ballot ID and a QR code beside the instructions, so copies can be told apart, and duplicates caught, when the ballots are counted. Pass the candidates and IDs as JSON in the `data` input:
+`ballots.typ` prints a batch of ballots. It starts with a cover page that lists every ballot ID in the batch, then prints one ballot per page. Each ballot shows its ID in readable text and as a QR code, beside the instructions, so copies can be told apart, and duplicates caught, when the ballots are counted. Keep the cover page with the ballots: each counted ballot's ID should appear on it exactly once.
+
+Pass the data as JSON in the `data` input:
 
 ```sh
 typst compile --font-path fonts \
-  --input data='{"candidates": ["Alice", "Bob"], "ballots": [{"id": "K7Q2-M9XW"}, {"id": "3HDN-PZ4R"}]}' \
+  --input data='{"title": "Board election", "printed": "October 9, 2026", "candidates": ["Alice", "Bob"], "ballots": [{"id": "K7Q2M-9XW3H"}, {"id": "3HDNP-Z4R8C"}]}' \
   ballots.typ
 ```
 
-The QR code encodes the ID. To encode something else, such as a longer string that also names the election, give a ballot a `"qr"` field. Without a `data` input, `ballots.typ` prints two sample copies.
+`title` and `printed` are optional and only appear on the cover page. The QR code encodes the ID; to encode something else, such as a longer string that also names the election, give a ballot a `"qr"` field. Without a `data` input, `ballots.typ` prints a two-ballot sample batch.
 
 `main.typ` can show an ID too: pass `ballot-id: "..."` (and optionally `qr-data: "..."`) to `conf`.
 
