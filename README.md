@@ -24,6 +24,8 @@ typst compile --font-path fonts \
   ballots.typ
 ```
 
+For an example of the output, see [`examples/sample-ballots.pdf`](examples/sample-ballots.pdf): a cover page and three ballots.
+
 `title` and `printed` are optional and only appear on the cover page. The QR code encodes the ID; to encode something else, such as a longer string that also names the election, give a ballot a `"qr"` field. Without a `data` input, `ballots.typ` prints a two-ballot sample batch.
 
 `main.typ` can show an ID too: pass `ballot-id: "..."` (and optionally `qr-data: "..."`) to `conf`.
