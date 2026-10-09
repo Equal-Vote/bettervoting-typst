@@ -1,7 +1,8 @@
-#let conf(
-  candidates: (),
-  doc
-) = {
+#import "vendor/zebra-0.1.0/src/lib.typ": qrcode
+
+// Page and text settings shared by every ballot. Use as `#show: ballot-setup`.
+// The OpenDyslexic font files are in fonts/; pass `--font-path fonts` to typst.
+#let ballot-setup(doc) = {
   set page(
     paper: "us-letter",
     margin: (x: 0.5in, y: 0.15in),
@@ -16,7 +17,23 @@
     justify: true,
     leading: 0.5em, //spacing between lines
   )
-  
+
+  doc
+}
+
+// The ballot ID and its QR code, shown to the right of a ballot's instructions. The ID is
+// printed large enough to read and type in by hand if the QR code can't be scanned.
+// `qr-data` is what the QR code encodes; it defaults to the ID itself.
+#let ballot-id-block(ballot-id, qr-data: none) = stack(
+  spacing: 0.25em,
+  align(right, qrcode(if qr-data == none { ballot-id } else { qr-data }, width: 0.85in, quiet-zone: 4)),
+  align(right, text(size: 8pt)[Ballot ID]),
+  align(right, text(size: 10pt, weight: "bold", hyphenate: false)[#ballot-id]),
+)
+
+// One STAR ballot. When `ballot-id` is given, it is printed with a QR code beside the
+// instructions so that each paper copy can be told apart when counting.
+#let star-ballot(candidates: (), ballot-id: none, qr-data: none) = {
   let ballot_table(candidates) = [
     #show "bubble0": name => box[
       #box(image(
@@ -134,24 +151,36 @@
     #image("images/STAR_Voting_Logo-black.png", fit: "contain")
   ]
   
-  align(center)[
-    #box[
-      #align(left)[
-        #list(
-          body-indent: 1.5em,
-          // tight: true,
-          // marker: [•],
-          // indent: 0pt,
-          // spacing: auto,
-          // marker-align: end,
-          [Give your favorite candidate(s) five stars.],
-          [Give your last choice(s) zero or leave blank.],
-          [Score other candidates as desired.],
-          [Equal scores indicate equal support.],
-        )
-      ]
+  let instructions = box[
+    #align(left)[
+      #list(
+        body-indent: 1.5em,
+        // tight: true,
+        // marker: [•],
+        // indent: 0pt,
+        // spacing: auto,
+        // marker-align: end,
+        [Give your favorite candidate(s) five stars.],
+        [Give your last choice(s) zero or leave blank.],
+        [Score other candidates as desired.],
+        [Equal scores indicate equal support.],
+      )
     ]
   ]
+
+  if ballot-id == none {
+    align(center, instructions)
+  } else {
+    // The ID and QR code share the instructions' row, so they add little height and every
+    // copy keeps them in the same spot for scanning. The instructions move to the left
+    // margin to leave room for the ID on one line.
+    grid(
+      columns: (auto, 1fr),
+      align: (left + horizon, right + horizon),
+      instructions,
+      ballot-id-block(ballot-id, qr-data: qr-data),
+    )
+  }
   
   ballot_table(candidates)
   
@@ -160,5 +189,16 @@
     The two highest scoring candidates are finalists. Your full vote goes to the finalist you prefer. The finalist with the most votes wins.
   ]
 
+}
+
+// A single ballot document, as used by main.typ.
+#let conf(
+  candidates: (),
+  ballot-id: none,
+  qr-data: none,
+  doc
+) = {
+  show: ballot-setup
+  star-ballot(candidates: candidates, ballot-id: ballot-id, qr-data: qr-data)
   doc
 }
