@@ -14,7 +14,7 @@ The ballot is set in OpenDyslexic. The regular and bold files are in `fonts/` un
 
 ## Print a batch of numbered ballots
 
-`ballots.typ` prints a batch of ballots. It starts with a cover page that lists every ballot ID in the batch, then prints one ballot per page. Each ballot shows its ID in readable text and as a QR code, beside the instructions, so copies can be told apart, and duplicates caught, when the ballots are counted. Keep the cover page with the ballots: each counted ballot's ID should appear on it exactly once.
+`ballots.typ` prints a batch of ballots. It starts with a cover page that lists every ballot ID in the batch, then prints one ballot per page. Each ballot shows its ID beside the instructions, so copies can be told apart, and duplicates caught, when the ballots are counted. Keep the cover page with the ballots: each counted ballot's ID should appear on it exactly once.
 
 Pass the data as JSON in the `data` input:
 
@@ -26,12 +26,8 @@ typst compile --font-path fonts \
 
 For an example of the output, see [`examples/sample-ballots.pdf`](examples/sample-ballots.pdf): a cover page and three ballots.
 
-`title` and `printed` are optional and only appear on the cover page. The QR code encodes the ID; to encode something else, such as a longer string that also names the election, give a ballot a `"qr"` field. Without a `data` input, `ballots.typ` prints a two-ballot sample batch.
+`title` and `printed` are optional and only appear on the cover page. Without a `data` input, `ballots.typ` prints a two-ballot sample batch.
 
-`main.typ` can show an ID too: pass `ballot-id: "..."` (and optionally `qr-data: "..."`) to `conf`.
+`main.typ` can show an ID too: pass `ballot-id: "..."` to `conf`.
 
-Twelve candidates fit on one page. A longer list runs onto a second page, and the ID and QR code appear only on the first.
-
-## Vendored packages
-
-`vendor/zebra-0.1.0` is the [zebra](https://github.com/rojul/typst-zebra) QR code package (MIT, see its `LICENSE`). It is vendored rather than imported from `@preview` so the template compiles offline and in typst.ts without fetching packages.
+Twelve candidates fit on one page. A longer list runs onto a second page, and the ID appears only on the first.

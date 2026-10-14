@@ -1,8 +1,8 @@
 #import "conf.typ": ballot-setup, star-ballot
 
 // Prints a batch of STAR ballots: a cover page listing every ballot ID in the batch, then
-// one ballot per page, each with its own ID and QR code, so copies can be told apart (and
-// duplicates caught) when the ballots are counted.
+// one ballot per page, each with its own ID, so copies can be told apart (and duplicates
+// caught) when the ballots are counted.
 //
 // The data comes in as JSON through the `data` input:
 //
@@ -10,8 +10,7 @@
 //     --input data='{"title": "Board election", "candidates": ["Alice", "Bob"], "ballots": [{"id": "K7Q2M-9XW3H"}, {"id": "3HDNP-Z4R8C"}]}' \
 //     ballots.typ
 //
-// "title" and "printed" (a date to show on the cover) are optional. Each ballot may also
-// carry a "qr" string, which its QR code encodes instead of the ID.
+// "title" and "printed" (a date to show on the cover) are optional.
 
 #let sample = (
   title: "Sample batch",
@@ -55,6 +54,5 @@
   star-ballot(
     candidates: data.candidates,
     ballot-id: ballot.id,
-    qr-data: ballot.at("qr", default: none),
   )
 }
