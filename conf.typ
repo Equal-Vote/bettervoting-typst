@@ -1,7 +1,6 @@
-#let conf(
-  candidates: (),
-  doc
-) = {
+// Page and text settings shared by every ballot. Use as `#show: ballot-setup`.
+// The OpenDyslexic font files are in fonts/; pass `--font-path fonts` to typst.
+#let ballot-setup(doc) = {
   set page(
     paper: "us-letter",
     margin: (x: 0.5in, y: 0.15in),
@@ -16,7 +15,21 @@
     justify: true,
     leading: 0.5em, //spacing between lines
   )
-  
+
+  doc
+}
+
+// The ballot ID, shown to the right of a ballot's instructions, large enough to read and
+// type in by hand when the ballots are counted.
+#let ballot-id-block(ballot-id) = stack(
+  spacing: 0.25em,
+  align(right, text(size: 8pt)[Ballot ID]),
+  align(right, text(size: 10pt, weight: "bold", hyphenate: false)[#ballot-id]),
+)
+
+// One STAR ballot. When `ballot-id` is given, it is printed beside the instructions so that
+// each paper copy can be told apart when counting.
+#let star-ballot(candidates: (), ballot-id: none) = {
   let ballot_table(candidates) = [
     #show "bubble0": name => box[
       #box(image(
@@ -134,24 +147,36 @@
     #image("images/STAR_Voting_Logo-black.png", fit: "contain")
   ]
   
-  align(center)[
-    #box[
-      #align(left)[
-        #list(
-          body-indent: 1.5em,
-          // tight: true,
-          // marker: [•],
-          // indent: 0pt,
-          // spacing: auto,
-          // marker-align: end,
-          [Give your favorite candidate(s) five stars.],
-          [Give your last choice(s) zero or leave blank.],
-          [Score other candidates as desired.],
-          [Equal scores indicate equal support.],
-        )
-      ]
+  let instructions = box[
+    #align(left)[
+      #list(
+        body-indent: 1.5em,
+        // tight: true,
+        // marker: [•],
+        // indent: 0pt,
+        // spacing: auto,
+        // marker-align: end,
+        [Give your favorite candidate(s) five stars.],
+        [Give your last choice(s) zero or leave blank.],
+        [Score other candidates as desired.],
+        [Equal scores indicate equal support.],
+      )
     ]
   ]
+
+  if ballot-id == none {
+    align(center, instructions)
+  } else {
+    // The ID shares the instructions' row, so it adds little height and sits in the same
+    // spot on every copy. The instructions move to the left margin to leave room for the ID
+    // on one line.
+    grid(
+      columns: (auto, 1fr),
+      align: (left + horizon, right + horizon),
+      instructions,
+      ballot-id-block(ballot-id),
+    )
+  }
   
   ballot_table(candidates)
   
@@ -160,5 +185,15 @@
     The two highest scoring candidates are finalists. Your full vote goes to the finalist you prefer. The finalist with the most votes wins.
   ]
 
+}
+
+// A single ballot document, as used by main.typ.
+#let conf(
+  candidates: (),
+  ballot-id: none,
+  doc
+) = {
+  show: ballot-setup
+  star-ballot(candidates: candidates, ballot-id: ballot-id)
   doc
 }
