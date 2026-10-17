@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="0 0 438.57977 416.18623"
+   fill="none"
+   stroke="none"
+   stroke-linecap="square"
+   stroke-miterlimit="10"
+   id="svg147"
+   width="438.57977"
+   height="416.18622"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs147" />
+  <clipPath
+     id="g264b89e0730_0_0.0">
+    <path
+       d="M 0,0 H 5712 V 7392 H 0 Z"
+       clip-rule="nonzero"
+       id="path1" />
+  </clipPath>
+  <g
+     id="legend-1"
+     transform="translate(-2636.637,-2952.1498)">
+    <path
+       stroke="#a2c4c9"
+       stroke-width="24"
+       stroke-linejoin="round"
+       stroke-linecap="butt"
+       d="m 2648.636,3113.9512 135.5503,-31.2222 71.7407,-118.5803 71.7405,118.5803 135.5503,31.2222 -91.2122,104.5088 12.0342,137.8767 -128.1128,-53.9902 -128.1128,53.9902 12.034,-137.8767 z"
+       fill-rule="evenodd"
+       id="path10-6" />
+    <path
+       fill="#000000"
+       d="m 2922.5398,3230.3853 v 35.3125 h -119.0156 v -35.3125 h 37.375 v -71.3281 h -37.375 v -26.5938 q 15.3594,-0.9218 34.3906,-8.1406 19.0469,-7.2344 33.2656,-16.625 h 15.3594 v 122.6875 z"
+       fill-rule="nonzero"
+       id="path11-5" />
+  </g>
+</svg>
