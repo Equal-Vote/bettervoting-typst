@@ -111,34 +111,57 @@
         }
       })
     
-    // See the strokes section for details on this!
-    #let frame(stroke) = (x, y) => (
-      left:   if y > 0 { stroke } else { none },
-      right:  if y > 0 { stroke } else { none },
-      top:    if y > 0 { stroke } else { none },
-      bottom: { stroke },
+    // Outputs a stroke pattern for a table
+    #let frame() = (x, y) => (
+      left:   if ( x == 0 and y > 0 and calc.odd(y) ) 
+                  { 2pt + rgb("A2C4C9FF") }
+                else if ( x == 0 and y > 0 and calc.even(y) )
+                  { 2pt + rgb("000000") }
+                else { none },
+      right:  if ( x == 6 and y > 0 and calc.odd(y) ) 
+                  { 2pt + rgb("A2C4C9FF") }
+                else if ( x == 6 and y > 0 and calc.even(y) )
+                  { 2pt + rgb("000000") }
+                else { none },
+      top:    if calc.odd(y) { 2pt + rgb("A2C4C9FF") } 
+                else { none },
+      bottom: if calc.odd(y) { 2pt + rgb("A2C4C9FF") }
+                else { 2pt + rgb("000000") },
     )
-      
+   
+    #show table.cell.where(x: 0): set text(weight: 700, size: 19.34pt)
+    
     #table(
-      align: (center),
+      align: (x, _) => if x == 0 {left+horizon} else {center+horizon},
       inset: 9pt,
-      columns: (3fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-      fill: (_, y) => if calc.odd(y) { rgb("EAF2F5") },
-      stroke: frame(3pt + rgb("A1C4C9")),
-      table.header[][#text(weight: 600)[Worst] \ star0][\ star1][\ star2][\ star3][\ star4][#text(weight: 600)[Best] \ star5],
+      fill: (_,y) => if calc.odd(y) { rgb("E0F0F3FF") },
+      columns: (4fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+      stroke: frame(),
+      table.header(
+        [],
+        [#text(weight: 600)[Worst] \ star0],
+        [\ star1],
+        [\ star2],
+        [\ star3],
+        [\ star4],
+        [#text(weight: 600)[Best] \ star5],
+      ),
       ..for name in candidates.sorted() {
-        ( [#text(weight: 700, size: 19.34pt)[#name]], 
-          [bubble0], 
-          [bubble1], 
-          [bubble2], 
-          [bubble3], 
-          [bubble4], 
-          [bubble5] 
+        ( [ #name ],
+          [ bubble0 ],
+          [ bubble1 ],
+          [ bubble2 ],
+          [ bubble3 ],
+          [ bubble4 ],
+          [ bubble5 ],
         )
-      }
+      },
+      table.footer(
+        table.cell(colspan: 7)[\ \ \ BALLOT_ID_PLACEHOLDER],
+      ),
     )
   ]
-  
+
   align(top+center)[
     #image(
       "images/STAR_Voting_Logo-blue_whitebackground.png",
