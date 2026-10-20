@@ -102,14 +102,27 @@
       ))
     ]
   
-    #set table(align: (x, y) => {
-        if x >= 2 and y >= 3 {
+    #set table(align: (x, _) => {
+        if x == 0 {
           // Align vertically and horizontally
-          center + horizon
+          left + horizon
         } else {
-          auto
-        }
-      })
+          center + horizon
+        }}
+    )
+    
+    #set table(fill: (_, y) => {
+        if calc.odd(y) {
+          // Fill odd rows light blue
+          rgb("E0F0F3FF") 
+        }}
+    )
+    
+    #let table_insets() = (x, _) => (
+        right: if x == 0 { 20pt } else { 0pt },
+        left:  if x == 0 { 30pt } else { 0pt },        
+        y:     8pt,
+    )
     
     // Outputs a stroke pattern for a table
     #let frame() = (x, y) => (
@@ -132,9 +145,7 @@
     #show table.cell.where(x: 0): set text(weight: 700, size: 19.34pt)
     
     #table(
-      align: (x, _) => if x == 0 {left+horizon} else {center+horizon},
-      inset: 9pt,
-      fill: (_,y) => if calc.odd(y) { rgb("E0F0F3FF") },
+      inset: table_insets(),
       columns: (4fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
       stroke: frame(),
       table.header(
