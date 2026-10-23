@@ -1,5 +1,6 @@
 # How to Use
 
+
 ## Get Typst
 
 Follow the instructions on [the Typst GitHub repo](https://github.com/typst/typst#installation) to install the command line interface on your machine.
