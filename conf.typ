@@ -9,7 +9,7 @@
   
   set text(
     font: "Montserrat",
-    size: 16pt,
+    size: 9pt,
   )
   
   set par(
@@ -112,7 +112,7 @@
     )
     
     #set table(fill: (_, y) => {
-        if calc.odd(y) {
+        if y >= 2 and calc.even(y) {
           // Fill odd rows light blue
           rgb("E0F0F3FF") 
         }}
@@ -126,20 +126,27 @@
     
     // Outputs a stroke pattern for a table
     #let frame() = (x, y) => (
-      left:   if ( x == 0 and y > 0 and calc.odd(y) ) 
+      left:   if ( x == 0 and y == 0 ) 
+                  { 2pt + rgb("000000") }
+                else if ( x == 0 and y > 0 and calc.even(y) ) 
                   { 2pt + rgb("A2C4C9FF") }
-                else if ( x == 0 and y > 0 and calc.even(y) )
+                else if ( x == 0 and y >= 1 and calc.odd(y) )
                   { 2pt + rgb("000000") }
                 else { none },
-      right:  if ( x == 6 and y > 0 and calc.odd(y) ) 
+      right:  if ( x == 6 and y == 0 ) 
+                  { 2pt + rgb("000000") }
+                else if ( x == 6 and y > 0 and calc.even(y) ) 
                   { 2pt + rgb("A2C4C9FF") }
-                else if ( x == 6 and y > 0 and calc.even(y) )
+                else if ( x == 6 and y > 0 and calc.odd(y) )
                   { 2pt + rgb("000000") }
                 else { none },
-      top:    if calc.odd(y) { 2pt + rgb("A2C4C9FF") } 
+      top:    if ( y == 0 )
+                  { 2pt + rgb("000000") }
+                else if ( y > 1 )
+                  { 2pt + rgb("A2C4C9FF") } 
                 else { none },
-      bottom: if calc.odd(y) { 2pt + rgb("A2C4C9FF") }
-                else { 2pt + rgb("000000") },
+      bottom: if ( y == 1 ) { 2pt + rgb("000000") }
+                else { none },
     )
    
     #show table.cell.where(x: 0): set text(weight: 700, size: 19.34pt)
@@ -148,6 +155,37 @@
       inset: table_insets(),
       columns: (4fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
       stroke: frame(),
+      table.header(
+        table.cell(colspan: 7)[
+          #align(top+center)[
+            #image(
+              "images/STAR_Voting_Logo-blue_whitebackground.png",
+              width:   4.832in,
+              height:  0.849in,
+              fit: "contain",
+            )
+          ]
+          
+          #align(left)[
+            #box[
+              #align(left)[
+                #list(
+                  body-indent: 0.5em,
+                  // tight: true,
+                  // marker: [•],
+                  // indent: 0pt,
+                  // spacing: auto,
+                  // marker-align: end,
+                  [Give your favorite candidate(s) five stars.],
+                  [Give your last choice(s) zero or leave blank.],
+                  [Score other candidates as desired.],
+                  [Equal scores indicate equal support.],
+                )
+              ]
+            ]
+          ]
+        ]
+      ),
       table.header(
         [],
         [#text(weight: 600)[Worst] \ star0],
@@ -168,47 +206,19 @@
         )
       },
       table.footer(
-        table.cell(colspan: 7)[\ \ \ BALLOT_ID_PLACEHOLDER],
+        table.cell(colspan: 7)[
+            #align(center)[
+              #set par(justify: true)
+              The two highest scoring candidates are finalists.\
+              Your full vote goes to the finalist you prefer.\
+              The finalist with the most votes wins.
+            ]\ #align(right)[BALLOT_ID_PLACEHOLDER]],
       ),
     )
   ]
-
-  align(top+center)[
-    #image(
-      "images/STAR_Voting_Logo-blue_whitebackground.png",
-      width:   4.832in,
-      height:  0.849in,
-      fit: "contain",
-    )
-  ]
-  
-  align(left)[
-    #box[
-      #align(left)[
-        #list(
-          body-indent: 0.5em,
-          // tight: true,
-          // marker: [•],
-          // indent: 0pt,
-          // spacing: auto,
-          // marker-align: end,
-          [Give your favorite candidate(s) five stars.],
-          [Give your last choice(s) zero or leave blank.],
-          [Score other candidates as desired.],
-          [Equal scores indicate equal support.],
-        )
-      ]
-    ]
-  ]
   
   ballot_table(candidates)
-  
-  align(center)[
-    #set par(justify: true)
-    The two highest scoring candidates are finalists.\
-    Your full vote goes to the finalist you prefer.\
-    The finalist with the most votes wins.
-  ]
+
 
   doc
 }
