@@ -9,7 +9,7 @@
   
   set text(
     font: "Montserrat",
-    size: 9pt,
+    size: 16pt,
   )
   
   set par(
